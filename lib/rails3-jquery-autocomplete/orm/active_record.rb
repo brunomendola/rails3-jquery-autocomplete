@@ -33,7 +33,8 @@ module Rails3JQueryAutocomplete
 
       def get_autocomplete_select_clause(model, method, options)
         table_name = model.table_name
-        (["#{table_name}.#{model.primary_key}", "#{table_name}.#{method}"] + (options[:extra_data][ model.name.underscore.to_sym ].blank? ? [] : options[:extra_data][ model.name.underscore.to_sym ]))
+        extra_data = options[:extra_data] || {}
+        (["#{table_name}.#{model.primary_key}", "#{table_name}.#{method}"] + (extra_data[ model.name.underscore.to_sym ].blank? ? [] : extra_data[ model.name.underscore.to_sym ]))
       end
 
       def get_autocomplete_where_clause(model, term, method, options)
